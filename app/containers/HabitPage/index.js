@@ -20,6 +20,8 @@ import makeSelectHabitPage from './selectors';
 
 import {
   selectDay,
+  addWeekOffset,
+  subtractWeekOffset,
 } from './actions';
 
 const days = [
@@ -76,9 +78,9 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
       <Container>
         <DateBar>
           <DatePicker
-            date={moment().format('dddd, MMM Do')}
-            onLeftClick={() => console.log('left')}
-            onRightClick={() => console.log('right')}
+            date={selectedDate}
+            onLeftClick={() => dispatch(subtractWeekOffset())}
+            onRightClick={() => dispatch(addWeekOffset())}
           />
           <DayPicker>
             {dayItems}

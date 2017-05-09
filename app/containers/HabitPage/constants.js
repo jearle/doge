@@ -13,3 +13,6 @@ export const MEDITATION_CREATE_SUCCESS = 'app/HabitPage/MEDITATION_CREATE_SUCCES
 export const MEDITATION_CREATE_ERROR = 'app/HabitPage/MEDITATION_CREATE_ERROR';
 
 export const DAY_SELECT = 'app/HabitPage/DAY_SELECT';
+
+export const WEEK_OFFSET_ADD = 'app/HabitPage/WEEK_OFFSET_ADD';
+export const WEEK_OFFSET_SUBSTRACT = 'app/HabitPage/WEEK_OFFSET_SUBSTRACT';

@@ -14,6 +14,9 @@ import {
   MEDITATION_CREATE_ERROR,
 
   DAY_SELECT,
+
+  WEEK_OFFSET_ADD,
+  WEEK_OFFSET_SUBSTRACT,
 } from './constants';
 
 export const loadMeditations = () => ({
@@ -57,4 +60,12 @@ export const selectDay = (day) => ({
   payload: {
     day,
   },
+});
+
+export const addWeekOffset = () => ({
+  type: WEEK_OFFSET_ADD,
+});
+
+export const subtractWeekOffset = () => ({
+  type: WEEK_OFFSET_SUBSTRACT,
 });
