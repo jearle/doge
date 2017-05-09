@@ -16,3 +16,6 @@ npm start
 
 Runs on: `http://localhost:53673`
 
+## Responsive Design
+
+It's semi responsive but looks best on narrower screens.  I did not setup a resize listener to dynamically resize the application, so you will need to refresh to get a proper responsive resize.
