@@ -24,9 +24,9 @@ const Day = styled.div`
   align-items: center;
   width: 100%
   height: 100%;
-  color: #3fc277;
+  color: ${({ didMeditateOnDay }) => didMeditateOnDay ? `#3fc277` : `#cdcdcd` };
   font-size: 1.5em;
-  border: 3px solid #3fc277;
+  border: 3px solid ${({ didMeditateOnDay }) => didMeditateOnDay ? `#3fc277` : `#cdcdcd` };
   border-radius: 100000px;
   margin-bottom: 5px;
 `;
@@ -68,6 +68,7 @@ class DayItem extends Component {
       day,
       onClick,
       selectedDay,
+      didMeditateOnDay,
     } = this.props;
 
     const {
@@ -80,7 +81,9 @@ class DayItem extends Component {
         innerRef={this.onRef}
         onClick={onClick}
       >
-        <Day>
+        <Day
+          didMeditateOnDay={didMeditateOnDay}
+        >
           {day[0]}
         </Day>
         <Dot
@@ -94,6 +97,7 @@ class DayItem extends Component {
 DayItem.propTypes = {
   day: PropTypes.string.isRequired,
   selectedDay: PropTypes.string.isRequired,
+  didMeditateOnDay: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

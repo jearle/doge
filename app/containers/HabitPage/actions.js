@@ -37,10 +37,10 @@ export const loadMeditationsError = (error) => ({
   },
 });
 
-export const createMeditation = (meditation) => ({
+export const createMeditation = (date) => ({
   type: MEDITATION_CREATE,
   payload: {
-    meditation,
+    date,
   },
 });
 

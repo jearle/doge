@@ -6,7 +6,8 @@
 
 import { fromJS } from 'immutable';
 import moment from 'moment';
-window.mm = moment;
+import { getDayDifference } from 'utils/day';
+
 import {
   MEDITATIONS_LOAD,
   MEDITATIONS_LOAD_SUCCESS,
@@ -21,25 +22,6 @@ import {
   WEEK_OFFSET_ADD,
   WEEK_OFFSET_SUBSTRACT,
 } from './constants';
-
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-const getDayDifference = (newDay, weekOffset) => {
-  const today = moment().format('dddd');
-
-  const todaysIndex = days.indexOf(today);
-  const newDaysIndex = days.indexOf(newDay);
-
-  return newDaysIndex - todaysIndex + weekOffset;
-}
 
 const initialState = fromJS({
   selectedDay: moment().format('dddd'),

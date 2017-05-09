@@ -16,12 +16,15 @@ import DayPicker from 'components/DayPicker';
 import DayItem from 'components/DayItem';
 import Meditated from 'components/Meditated';
 
-import makeSelectHabitPage from './selectors';
+import { getDateWithDayAndOffset, } from 'utils/day';
+
+import makeSelectHabitPage, { makeSelectHadMeditated, } from './selectors';
 
 import {
   selectDay,
   addWeekOffset,
   subtractWeekOffset,
+  createMeditation,
 } from './actions';
 
 const days = [
@@ -34,13 +37,13 @@ const days = [
   'Saturday',
 ];
 
-const createDayItems = ({ selectedDay, selectedDate, onClick }) => days
+const createDayItems = ({ weekOffset, selectedDay, hasMeditatedOnDate, onClick }) => days
   .map((day, i) => (
     <DayItem
       key={i}
       day={day}
+      didMeditateOnDay={hasMeditatedOnDate(getDateWithDayAndOffset(day, weekOffset))}
       selectedDay={selectedDay}
-      selectedDate={selectedDate}
       onClick={() => onClick(day)}
     />
   ));
@@ -61,14 +64,17 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
       HabitPage: {
         selectedDay,
         selectedDate,
+        weekOffset,
       },
+      hasMeditatedOnDate,
 
       dispatch,
     } = this.props;
 
     const dayItems = createDayItems({
+      weekOffset,
       selectedDay,
-      selectedDate,
+      hasMeditatedOnDate,
       onClick(day) {
         dispatch(selectDay(day));
       },
@@ -90,8 +96,8 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
           <Meditated
             total={'1'}
             max={'4'}
-            onClick={() => console.log('meditate')}
-            didMeditate={true}
+            onClick={() => dispatch(createMeditation(selectedDate))}
+            didMeditate={hasMeditatedOnDate(selectedDate)}
           />
         </Content>
       </Container>
@@ -101,10 +107,12 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
 
 HabitPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  hasMeditatedOnDate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   HabitPage: makeSelectHabitPage(),
+  hasMeditatedOnDate: makeSelectHadMeditated(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -16,4 +16,4 @@ export const getTimestamp = () => firebase
   .ServerValue
   .TIMESTAMP;
 
-export default firebaseApp;
+export default app;
