@@ -16,8 +16,10 @@ export const getDayDifference = (newDay, weekOffset) => {
   const todaysIndex = getDays().indexOf(today);
   const newDaysIndex = getDays().indexOf(newDay);
 
-  return newDaysIndex - todaysIndex + weekOffset;
-}
+  const difference = newDaysIndex - todaysIndex;
+
+  return difference + weekOffset;
+};
 
 export const getDateWithDayAndOffset = (day, weekOffset) => moment()
   .add(getDayDifference(day, weekOffset), 'days')

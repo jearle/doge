@@ -39,10 +39,10 @@ const Check = styled.div`
   align-items: center;
   font-size: 15em;
   cursor: pointer;
-  color: ${({ didMeditate }) => didMeditate ? `#3fc277` : `#cdcdcd` };
+  color: ${({ didMeditate }) => didMeditate ? '#3fc277' : '#cdcdcd'};
 
   i {
-    border: 5px solid ${({ didMeditate }) => didMeditate ? `#3fc277` : `#cdcdcd` };
+    border: 5px solid ${({ didMeditate }) => didMeditate ? '#3fc277' : '#cdcdcd'};
     border-radius: 1000px;
     padding: 24px;
   }

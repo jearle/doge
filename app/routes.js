@@ -22,20 +22,8 @@ export default function createRoutes(store) {
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
-        store.dispatch(replace('/my-dojo'));
+        store.dispatch(replace('/habit'));
         cb();
-        // console.log(nextState);
-        // const importModules = Promise.all([
-        //   import('containers/HomePage'),
-        // ]);
-
-        // const renderRoute = loadModule(cb);
-
-        // importModules.then(([component]) => {
-        //   renderRoute(component);
-        // });
-
-        // importModules.catch(errorLoading);
       },
     }, {
       path: '/my-dojo',

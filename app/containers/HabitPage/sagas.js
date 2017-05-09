@@ -11,7 +11,15 @@ import {
 } from 'services/meditate';
 
 import {
+  getDateWithDayAndOffset,
+  getDays,
+} from 'utils/day';
+
+import {
+  DAY_SELECT,
+
   MEDITATIONS_LOAD,
+  MEDITATIONS_LOAD_SUCCESS,
 
   MEDITATION_CREATE,
   MEDITATION_CREATE_SUCCESS,
@@ -34,16 +42,42 @@ import {
 
   removeMeditationSuccess,
   removeMeditationError,
+
+  setDaysMeditated,
+  setMeditationId,
 } from './actions';
 
-import makeSelectHabitPage from './selectors';
+import makeSelectHabitPage, {
+  makeSelectDaysMeditated,
+  makeSelectMeditationIdForDate,
+} from './selectors';
 
-export function* removeMeditationSaga({ payload: { id }}) {
+export function* setSelectionsSaga() {
+  const {
+    selectedDate,
+    weekOffset,
+  } = yield select(makeSelectHabitPage());
+
+  const daysMeditated = yield select(makeSelectDaysMeditated());
+  const meditationIdForDate = yield select(makeSelectMeditationIdForDate());
+
+  const dates = getDays()
+    .map((day) => getDateWithDayAndOffset(day, weekOffset));
+
+  const daysMeditatedCount = daysMeditated(dates);
+
+  const meditationId = meditationIdForDate(selectedDate);
+
+  yield put(setDaysMeditated(daysMeditatedCount));
+  yield put(setMeditationId(meditationId));
+}
+
+export function* removeMeditationSaga({ payload: { id } }) {
   try {
     yield call(removeMeditation, { id });
     yield put(removeMeditationSuccess());
   } catch ({ message }) {
-    yield put(removeMeditationError(messagee));
+    yield put(removeMeditationError(message));
   }
 }
 
@@ -102,6 +136,20 @@ export function* takeLatestLoadMeditationsSaga() {
   yield cancel(watcher);
 }
 
+export function* takeLatestLoadMeditationsSuccessSaga() {
+  const watcher = yield takeLatest(MEDITATIONS_LOAD_SUCCESS, setSelectionsSaga);
+
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* takeLatestSelectDaySaga() {
+  const watcher = yield takeLatest(DAY_SELECT, setSelectionsSaga);
+
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
 export function* takeLatestMeditationCreateSuccessSaga() {
   const watcher = yield takeLatest(MEDITATION_CREATE_SUCCESS, loadMeditationsSaga);
 
@@ -129,6 +177,7 @@ export function* initialLoadMeditationsSaga() {
 
 // All sagas to be loaded
 export default [
+  takeLatestSelectDaySaga,
   takeLatestMeditationCreate,
   takeLatestAddWeekOffsetSaga,
   takeLatestSubtractWeekOffsetSaga,
@@ -136,5 +185,6 @@ export default [
   takeLatestMeditationCreateSuccessSaga,
   takeLatestMeditationRemoveSaga,
   takeLatestMeditationRemoveSuccessSaga,
+  takeLatestLoadMeditationsSuccessSaga,
   initialLoadMeditationsSaga,
 ];

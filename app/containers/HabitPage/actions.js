@@ -21,7 +21,24 @@ import {
 
   WEEK_OFFSET_ADD,
   WEEK_OFFSET_SUBSTRACT,
+
+  DAYS_MEDITATED_SET,
+  MEDITATION_ID_SET,
 } from './constants';
+
+export const setDaysMeditated = (meditations) => ({
+  type: DAYS_MEDITATED_SET,
+  payload: {
+    meditations,
+  },
+});
+
+export const setMeditationId = (meditationId) => ({
+  type: MEDITATION_ID_SET,
+  payload: {
+    meditationId,
+  },
+});
 
 export const loadMeditations = () => ({
   type: MEDITATIONS_LOAD,

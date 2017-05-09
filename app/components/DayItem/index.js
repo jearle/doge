@@ -24,9 +24,9 @@ const Day = styled.div`
   align-items: center;
   width: 100%
   height: 100%;
-  color: ${({ didMeditateOnDay }) => didMeditateOnDay ? `#3fc277` : `#cdcdcd` };
+  color: ${({ didMeditateOnDay }) => didMeditateOnDay ? '#3fc277' : '#cdcdcd'};
   font-size: 1.5em;
-  border: 3px solid ${({ didMeditateOnDay }) => didMeditateOnDay ? `#3fc277` : `#cdcdcd` };
+  border: 3px solid ${({ didMeditateOnDay }) => didMeditateOnDay ? '#3fc277' : '#cdcdcd'};
   border-radius: 100000px;
   margin-bottom: 5px;
 `;

@@ -20,3 +20,6 @@ export const DAY_SELECT = 'app/HabitPage/DAY_SELECT';
 
 export const WEEK_OFFSET_ADD = 'app/HabitPage/WEEK_OFFSET_ADD';
 export const WEEK_OFFSET_SUBSTRACT = 'app/HabitPage/WEEK_OFFSET_SUBSTRACT';
+
+export const DAYS_MEDITATED_SET = 'app/HabitPage/DAYS_MEDITATED_SET';
+export const MEDITATION_ID_SET = 'app/HabitPage/MEDITATION_ID_SET';

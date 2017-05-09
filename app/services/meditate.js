@@ -1,7 +1,7 @@
 import firebase, { getTimestamp } from './firebase';
 
-const MEDITATION_PATH = `/meditations`;
-const USER_ID = `1`;
+const MEDITATION_PATH = '/meditations';
+const USER_ID = '1';
 
 const MEDITATION_REF = firebase
   .database()

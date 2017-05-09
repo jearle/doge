@@ -15,12 +15,10 @@ import DayPicker from 'components/DayPicker';
 import DayItem from 'components/DayItem';
 import Meditated from 'components/Meditated';
 
-import { getDateWithDayAndOffset, getDays, } from 'utils/day';
+import { getDateWithDayAndOffset, getDays } from 'utils/day';
 
 import makeSelectHabitPage, {
   makeSelectHadMeditated,
-  makeSelectDaysMeditated,
-  makeSelectMeditationIdForDate,
 } from './selectors';
 
 import {
@@ -59,10 +57,10 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
         selectedDay,
         selectedDate,
         weekOffset,
+        daysMeditated,
+        meditationId,
       },
       hasMeditatedOnDate,
-      daysMeditated,
-      meditationIdForDate,
 
       dispatch,
     } = this.props;
@@ -75,13 +73,6 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
         dispatch(selectDay(day));
       },
     });
-
-    const dates = getDays()
-      .map((day) => getDateWithDayAndOffset(day, weekOffset));
-
-    const daysMeditatedCount = daysMeditated(dates);
-
-    const meditationId = meditationIdForDate(selectedDate);
 
     return (
       <Container>
@@ -97,7 +88,7 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
         </DateBar>
         <Content>
           <Meditated
-            total={`${daysMeditatedCount}`}
+            total={`${daysMeditated}`}
             max={'4'}
             onClick={() => hasMeditatedOnDate(selectedDate) ?
               dispatch(removeMeditation(meditationId)) :
@@ -112,17 +103,14 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
 }
 
 HabitPage.propTypes = {
+  HabitPage: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   hasMeditatedOnDate: PropTypes.func.isRequired,
-  daysMeditated: PropTypes.func.isRequired,
-  meditationIdForDate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   HabitPage: makeSelectHabitPage(),
   hasMeditatedOnDate: makeSelectHadMeditated(),
-  daysMeditated: makeSelectDaysMeditated(),
-  meditationIdForDate: makeSelectMeditationIdForDate(),
 });
 
 function mapDispatchToProps(dispatch) {

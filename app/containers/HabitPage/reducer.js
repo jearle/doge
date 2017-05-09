@@ -21,6 +21,9 @@ import {
 
   WEEK_OFFSET_ADD,
   WEEK_OFFSET_SUBSTRACT,
+
+  DAYS_MEDITATED_SET,
+  MEDITATION_ID_SET,
 } from './constants';
 
 const initialState = fromJS({
@@ -34,10 +37,12 @@ const initialState = fromJS({
 
   isCreatingMeditation: false,
   createMeditationsError: '',
+
+  daysMeditated: 0,
+  meditationId: null,
 });
 
 function habitPageReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case MEDITATIONS_LOAD:
       return state
@@ -73,10 +78,18 @@ function habitPageReducer(state = initialState, action) {
 
     case WEEK_OFFSET_ADD:
       return state
-        .set('weekOffset', state.get('weekOffset') + 7)
+        .set('weekOffset', state.get('weekOffset') + 7);
     case WEEK_OFFSET_SUBSTRACT:
       return state
-        .set('weekOffset', state.get('weekOffset') - 7)
+        .set('weekOffset', state.get('weekOffset') - 7);
+
+    case DAYS_MEDITATED_SET:
+      return state
+        .set('daysMeditated', action.payload.meditations);
+    case MEDITATION_ID_SET:
+      return state
+        .set('meditationId', action.payload.meditationId);
+
     default:
       return state;
   }
