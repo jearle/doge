@@ -34,7 +34,7 @@ import makeSelectHabitPage from './selectors';
 export function* loadMeditationsSaga() {
   try {
     const meditations = yield call(loadMeditations);
-    console.log(meditations);
+
     yield put(loadMeditationsSuccess(meditations));
   } catch ({ message }) {
     yield put(loadMeditationsError(message));

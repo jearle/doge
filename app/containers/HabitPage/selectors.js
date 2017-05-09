@@ -18,6 +18,15 @@ const makeSelectHadMeditated = () => createSelector(
     .length > 0
 );
 
+const makeSelectDaysMeditated = () => createSelector(
+  selectHabitPageDomain(),
+  (substate) => (dates) => substate
+    .toJS()
+    .meditations
+    .filter((meditation) => dates.indexOf(meditation.date) !== -1)
+    .length
+);
+
 /**
  * Default selector used by HabitPage
  */
@@ -31,4 +40,5 @@ export default makeSelectHabitPage;
 export {
   selectHabitPageDomain,
   makeSelectHadMeditated,
+  makeSelectDaysMeditated,
 };

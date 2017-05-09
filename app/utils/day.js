@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const days = [
+export const getDays = () => [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -13,8 +13,8 @@ const days = [
 export const getDayDifference = (newDay, weekOffset) => {
   const today = moment().format('dddd');
 
-  const todaysIndex = days.indexOf(today);
-  const newDaysIndex = days.indexOf(newDay);
+  const todaysIndex = getDays().indexOf(today);
+  const newDaysIndex = getDays().indexOf(newDay);
 
   return newDaysIndex - todaysIndex + weekOffset;
 }
