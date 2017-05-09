@@ -18,6 +18,10 @@ import Meditated from 'components/Meditated';
 
 import makeSelectHabitPage from './selectors';
 
+import {
+  selectDay,
+} from './actions';
+
 const days = [
   'Sunday',
   'Monday',
@@ -28,11 +32,13 @@ const days = [
   'Saturday',
 ];
 
-const createDayItems = ({ onClick }) => days
+const createDayItems = ({ selectedDay, selectedDate, onClick }) => days
   .map((day, i) => (
     <DayItem
       key={i}
       day={day}
+      selectedDay={selectedDay}
+      selectedDate={selectedDate}
       onClick={() => onClick(day)}
     />
   ));
@@ -49,9 +55,20 @@ const Content = styled.div`
 
 export class HabitPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const {
+      HabitPage: {
+        selectedDay,
+        selectedDate,
+      },
+
+      dispatch,
+    } = this.props;
+
     const dayItems = createDayItems({
+      selectedDay,
+      selectedDate,
       onClick(day) {
-        console.log(day);
+        dispatch(selectDay(day));
       },
     });
 

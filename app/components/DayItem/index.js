@@ -36,6 +36,8 @@ const Dot = styled.div`
   height: 9px;
   background: black;
   border-radius: 10px;
+  transition: opacity .5s;
+  opacity: ${({ isSelected }) => isSelected ? 1 : 0};
 `;
 
 class DayItem extends Component {
@@ -65,6 +67,7 @@ class DayItem extends Component {
     const {
       day,
       onClick,
+      selectedDay,
     } = this.props;
 
     const {
@@ -80,7 +83,9 @@ class DayItem extends Component {
         <Day>
           {day[0]}
         </Day>
-        <Dot />
+        <Dot
+          isSelected={selectedDay === day}
+        />
       </Container>
     );
   }
@@ -88,6 +93,7 @@ class DayItem extends Component {
 
 DayItem.propTypes = {
   day: PropTypes.string.isRequired,
+  selectedDay: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
