@@ -61,6 +61,8 @@ module.exports = (options) => ({
     }],
   },
   plugins: options.plugins.concat([
+    new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
+
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports-loader?self.fetch!whatwg-fetch',
