@@ -9,8 +9,10 @@ Tested with:
 
 ## Running
 
-`npm install`
-`npm start`
+```bash
+npm install
+npm start
+```
 
 Runs on: `http://localhost:53673`
 
