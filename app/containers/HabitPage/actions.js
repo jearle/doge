@@ -13,6 +13,10 @@ import {
   MEDITATION_CREATE_SUCCESS,
   MEDITATION_CREATE_ERROR,
 
+  MEDITATION_REMOVE,
+  MEDITATION_REMOVE_SUCCESS,
+  MEDITATION_REMOVE_ERROR,
+
   DAY_SELECT,
 
   WEEK_OFFSET_ADD,
@@ -50,6 +54,24 @@ export const createMeditationSuccess = () => ({
 
 export const createMeditationError = (error) => ({
   type: MEDITATION_CREATE_ERROR,
+  payload: {
+    error,
+  },
+});
+
+export const removeMeditation = (id) => ({
+  type: MEDITATION_REMOVE,
+  payload: {
+    id,
+  },
+});
+
+export const removeMeditationSuccess = () => ({
+  type: MEDITATION_REMOVE_SUCCESS,
+});
+
+export const removeMeditationError = (error) => ({
+  type: MEDITATION_REMOVE_ERROR,
   payload: {
     error,
   },

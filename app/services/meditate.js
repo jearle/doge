@@ -28,6 +28,12 @@ export function* createMeditation({ date }) {
     });
 }
 
+export function* removeMeditation({ id }) {
+  return yield MEDITATION_REF
+    .child(id)
+    .remove();
+}
+
 export function* loadMeditations() {
   return yield MEDITATION_REF
     .once('value')

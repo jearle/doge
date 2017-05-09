@@ -8,6 +8,21 @@ const selectHabitPageDomain = () => (state) => state.get('habitPage');
 /**
  * Other specific selectors
  */
+const makeSelectMeditationIdForDate = () => createSelector(
+  selectHabitPageDomain(),
+  (substate) => (date) => {
+    const filteredMeditations = substate
+      .toJS()
+      .meditations
+      .filter((meditation) => meditation.date === date);
+
+    if (filteredMeditations.length > 0) {
+      return filteredMeditations[0].id;
+    }
+
+    return null;
+  }
+);
 
 const makeSelectHadMeditated = () => createSelector(
   selectHabitPageDomain(),
@@ -41,4 +56,5 @@ export {
   selectHabitPageDomain,
   makeSelectHadMeditated,
   makeSelectDaysMeditated,
+  makeSelectMeditationIdForDate,
 };

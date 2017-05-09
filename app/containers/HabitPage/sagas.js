@@ -6,6 +6,7 @@ import {
 
 import {
   createMeditation,
+  removeMeditation,
   loadMeditations,
 } from 'services/meditate';
 
@@ -14,6 +15,9 @@ import {
 
   MEDITATION_CREATE,
   MEDITATION_CREATE_SUCCESS,
+
+  MEDITATION_REMOVE,
+  MEDITATION_REMOVE_SUCCESS,
 
   WEEK_OFFSET_ADD,
   WEEK_OFFSET_SUBSTRACT,
@@ -27,9 +31,21 @@ import {
   selectDay,
   createMeditationSuccess,
   createMeditationError,
+
+  removeMeditationSuccess,
+  removeMeditationError,
 } from './actions';
 
 import makeSelectHabitPage from './selectors';
+
+export function* removeMeditationSaga({ payload: { id }}) {
+  try {
+    yield call(removeMeditation, { id });
+    yield put(removeMeditationSuccess());
+  } catch ({ message }) {
+    yield put(removeMeditationError(messagee));
+  }
+}
 
 export function* loadMeditationsSaga() {
   try {
@@ -93,6 +109,20 @@ export function* takeLatestMeditationCreateSuccessSaga() {
   yield cancel(watcher);
 }
 
+export function* takeLatestMeditationRemoveSaga() {
+  const watcher = yield takeLatest(MEDITATION_REMOVE, removeMeditationSaga);
+
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* takeLatestMeditationRemoveSuccessSaga() {
+  const watcher = yield takeLatest(MEDITATION_REMOVE_SUCCESS, loadMeditationsSaga);
+
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
 export function* initialLoadMeditationsSaga() {
   yield put(loadMeditationsAction());
 }
@@ -104,5 +134,7 @@ export default [
   takeLatestSubtractWeekOffsetSaga,
   takeLatestLoadMeditationsSaga,
   takeLatestMeditationCreateSuccessSaga,
+  takeLatestMeditationRemoveSaga,
+  takeLatestMeditationRemoveSuccessSaga,
   initialLoadMeditationsSaga,
 ];
