@@ -28,11 +28,24 @@ const Text = styled.div`
 const BoldText = styled.div`
   color: black;
   font-size: 1.1em;
+  margin-bottom: 20px;
 `;
 
 const Check = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15em;
+  cursor: pointer;
+  color: ${({ didMeditate }) => didMeditate ? `#3fc277` : `#cdcdcd` };
+
+  i {
+    border: 5px solid ${({ didMeditate }) => didMeditate ? `#3fc277` : `#cdcdcd` };
+    border-radius: 1000px;
+    padding: 24px;
+  }
 `;
 
 const Meditated = ({ total, max, onClick, didMeditate }) => (
@@ -58,6 +71,7 @@ const Meditated = ({ total, max, onClick, didMeditate }) => (
     </BoldText>
     <Check
       onClick={onClick}
+      didMeditate={didMeditate}
     >
       <i
         className={'fa fa-check'}

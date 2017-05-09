@@ -72,7 +72,7 @@ export class HabitPage extends React.PureComponent { // eslint-disable-line reac
             total={'1'}
             max={'4'}
             onClick={() => console.log('meditate')}
-            didMeditate={false}
+            didMeditate={true}
           />
         </Content>
       </Container>
