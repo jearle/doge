@@ -1,4 +1,4 @@
-import { take, takeLatest, call, put, select } from 'redux-saga/effects';
+import { take, takeLatest, call, put, select, cancel } from 'redux-saga/effects';
 
 import {
   LOCATION_CHANGE,
